@@ -115,11 +115,18 @@ const arr2 = arr1.reduce((a, b) => {
 
 function charFromEpisodeBefore(date) {
 	const time = date.getTime()
-	const episodeTime = episodes.filter(el => {
-		const timeEpisode = new Date(el.created).getTime()
-		return timeEpisode < time
-	})
-	return episodeTime
+	const episodeTime = episodes
+		.filter(el => {
+			const timeEpisode = new Date(el.created).getTime()
+			return timeEpisode < time
+		})
+		.map(el => el.characters)
+		.flat()
+		.map(url => url.replace("https://rickandmortyapi.com/api/character/", ""))
+		.map(element => characters[element - 1])
+	return Array.from(new Set(episodeTime))
 }
 const timeEpi = new Date(2020, 3, 20)
-console.log(charFromEpisodeBefore(timeEpi))
+//console.log(charFromEpisodeBefore(timeEpi))
+
+
