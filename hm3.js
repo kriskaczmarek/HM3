@@ -87,4 +87,15 @@ function charCreatedBefore(date) {
 	return result
 }
 const day = new Date(2018, 3, 15)
-console.log(charCreatedBefore(day))
+//console.log(charCreatedBefore(day))
+
+//Count average in given array
+const arr = [56.56,33.45,12,45,78,90,5,9]
+const arrAverage = arr.reduce((a,c,i,ar)=>{
+	a+=c
+	if(i===ar.length-1){
+		return a/ar.length
+	}
+	return a
+})
+console.log(arrAverage);//will be 41.12625
