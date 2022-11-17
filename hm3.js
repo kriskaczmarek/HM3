@@ -90,12 +90,36 @@ const day = new Date(2018, 3, 15)
 //console.log(charCreatedBefore(day))
 
 //Count average in given array
-const arr = [56.56,33.45,12,45,78,90,5,9]
-const arrAverage = arr.reduce((a,c,i,ar)=>{
-	a+=c
-	if(i===ar.length-1){
-		return a/ar.length
+const arr = [56.56, 33.45, 12, 45, 78, 90, 5, 9]
+const arrAverage = arr.reduce((a, c, i, ar) => {
+	a += c
+	if (i === ar.length - 1) {
+		return a / ar.length
 	}
 	return a
 })
-console.log(arrAverage);//will be 41.12625
+//console.log(arrAverage) //will be 41.12625
+
+//remove repeated element
+
+const arr1 = [1, 1, 2, 3, 4, 5, 5, 6, 7, 8, 8, 9]
+const arr2 = arr1.reduce((a, b) => {
+	if (a.indexOf(b) === -1) {
+		a.push(b)
+	}
+	return a
+}, [])
+//console.log(arr2) //will be [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// Map all characters from episodes created before April 30, 2020
+
+function charFromEpisodeBefore(date) {
+	const time = date.getTime()
+	const episodeTime = episodes.filter(el => {
+		const timeEpisode = new Date(el.created).getTime()
+		return timeEpisode < time
+	})
+	return episodeTime
+}
+const timeEpi = new Date(2020, 3, 20)
+console.log(charFromEpisodeBefore(timeEpi))
