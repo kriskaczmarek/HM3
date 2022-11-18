@@ -1,8 +1,11 @@
 const financialData = require("./financial.json")
 
 //######How much money was spent in 2014
+
 // console.log("Financial data: " + getFiancialObject().moneySpend2014(2014)) //=>Financial data: 46794.860000000015
+
 //#####	Earnings per company
+
 // console.log(
 // 	"Financial data: " + getFiancialObject().spendingsPerCompany("CODAX")
 // ) //=>Financial data: 19036.06
@@ -12,13 +15,17 @@ const financialData = require("./financial.json")
 // console.log(
 // 	"Financial data: " + getFiancialObject().spendingsPerCompany("ECSTASIA")
 // ) //=>Financial data: 15695.640000000001
+
 //#####	Spendings per transaction type
+
 // console.log("Financial data: " + getFiancialObject().spendingsPerTransType(1))//Financial data: 14584.609999999997
 // console.log("Financial data: " + getFiancialObject().spendingsPerTransType(2))//Financial data: 8999.51
 // console.log("Financial data: " + getFiancialObject().spendingsPerTransType(3))//Financial data: 6657.51
 // console.log("Financial data: " + getFiancialObject().spendingsPerTransType(4))//Financial data: 10092.039999999999
 // console.log("Financial data: " + getFiancialObject().spendingsPerTransType(5))//Financial data: 9253.699999999999
+
 //#####iv.	Spendings by month
+
 // console.log("Financial data: " + getFiancialObject().spendingByMonth(1)) //Financial data: 5276.99
 // console.log("Financial data: " + getFiancialObject().spendingByMonth(2)) //Financial data: 3743.67
 // console.log("Financial data: " + getFiancialObject().spendingByMonth(3)) //Financial data: 4231.96
@@ -31,7 +38,17 @@ const financialData = require("./financial.json")
 // console.log("Financial data: " + getFiancialObject().spendingByMonth(10)) //Financial data: 4671.37
 // console.log("Financial data: " + getFiancialObject().spendingByMonth(11)) //Financial data: 1880.7
 // console.log("Financial data: " + getFiancialObject().spendingByMonth(12)) //Financial data: 3878.5
+
 //#####Spendings per day of the week
+//1-Monday,2-Tuesday,3-Wednesday,4-Thursday,5-Friday,6-Saturday,7-Sunday
+
+// console.log("Financial data: " + getFiancialObject().spendingPerDayofTheWeek(1))//Financial data: 5552.29
+// console.log("Financial data: " + getFiancialObject().spendingPerDayofTheWeek(2))//Financial data: 9674.619999999999
+// console.log("Financial data: " + getFiancialObject().spendingPerDayofTheWeek(3))//Financial data: 9211.930000000002
+// console.log("Financial data: " + getFiancialObject().spendingPerDayofTheWeek(4))//Financial data: 12557.249999999998
+// console.log("Financial data: " + getFiancialObject().spendingPerDayofTheWeek(5))//Financial data: 5851.7
+// console.log("Financial data: " + getFiancialObject().spendingPerDayofTheWeek(6))//Financial data: 2228.29
+// console.log("Financial data: " + getFiancialObject().spendingPerDayofTheWeek(7))//Financial data: 4511.29
 
 function getFiancialObject() {
 	const financialObject = {
@@ -83,10 +100,27 @@ function getFiancialObject() {
 				}, 0)
 			return spendingInMonth
 		},
-		spendingPerDayofTheWeek() {},
+		spendingPerDayofTheWeek(day) {
+			const dayOfWeek = financialData
+				.filter(el => {
+					const weekDay = new Date(
+						el.detailsOfPayent.date.split("-").reverse().join(",")
+					).getDay()
+					if (day === 7) {
+						day = 0
+					}
+					return weekDay === day
+				})
+				.reduce((a, b) => {
+					a += +b.cost
+					return a
+				}, 0)
+			return dayOfWeek
+		},
 	}
 	// TODO (create functions for calculations below)
 	return financialObject
 }
+
 
 // TODO (util functions)
