@@ -52,6 +52,7 @@ const financialData = require("./financial.json")
 
 function getFiancialObject() {
 	const financialObject = {
+		//string is a year in this case 2014
 		moneySpend2014(string) {
 			const totalSpendingsIn2014 = financialData
 				.filter(el => {
@@ -62,7 +63,7 @@ function getFiancialObject() {
 					return a
 				}, 0)
 			return totalSpendingsIn2014
-		},
+		},//string is name of company
 		spendingsPerCompany(string) {
 			const spendings = financialData
 				.filter(el => {
@@ -100,6 +101,7 @@ function getFiancialObject() {
 				}, 0)
 			return spendingInMonth
 		},
+		//"day" is in fact a number as argument - 1-Monday,2-Tuesday,3-Wednesday,4-Thursday,5-Friday,6-Saturday,7-Sunday
 		spendingPerDayofTheWeek(day) {
 			const dayOfWeek = financialData
 				.filter(el => {
